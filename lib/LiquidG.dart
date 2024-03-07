@@ -14,12 +14,14 @@ class LiquidButtons extends StatefulWidget {
   var ip;
   var user;
   String pass;
+  int port;
 
   LiquidButtons({
     Key? key,
     required this.ip,
     required this.user,
     required this.pass,
+    required this.port,
   }) : super(key: key);
 
 
@@ -68,12 +70,9 @@ class _LiquidButtonsState extends State<LiquidButtons> {
 
   //-----------------------reboot function -----------------------------------------//
   Future<void> reboot() async {
-
-
-
     final client = SSHClient(
       await SSHSocket.connect(widget.ip
-          , 22,
+          , widget.port,
           timeout: const Duration(seconds: 5)),
       username: widget.user
       // 'lg'
@@ -107,7 +106,7 @@ class _LiquidButtonsState extends State<LiquidButtons> {
           widget.ip
            //'192.168.56.101'
           ,
-          22,
+          widget.port,
           timeout: const Duration(seconds: 5)),
       username:
       widget.user
@@ -131,7 +130,7 @@ class _LiquidButtonsState extends State<LiquidButtons> {
           widget.ip
           // '192.168.56.101'
           ,
-          22,
+          widget.port,
           timeout: const Duration(seconds: 5)),
       username: widget.user
       // 'lg'
@@ -160,10 +159,8 @@ class _LiquidButtonsState extends State<LiquidButtons> {
   Future<void> onlgRig() async {
     final client = SSHClient(
       await SSHSocket.connect(
-
-          widget.ip
-          ,
-          22,
+          widget.ip,
+          widget.port,
           timeout: const Duration(seconds: 5)),
       username: widget.user
       // 'lg'
@@ -230,6 +227,21 @@ class _LiquidButtonsState extends State<LiquidButtons> {
                   width: MediaQuery.of(context).size.width * 1,
 
                 ).p(30),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: widget.ip == ''? Colors.red.withOpacity(0.5) : Colors.white.withOpacity(0.1),
+                  ),
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  width: MediaQuery.of(context).size.width * 1,
+                  child: TextButton(
+                    child: Text('Change Setting',
+                        style: TextStyle(fontSize: 23, color: Colors.white)),
+                    onPressed: () {
+                      Get.to( Setting());
+                    },
+                  ),
+                ).p(20),
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),

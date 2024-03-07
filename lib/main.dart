@@ -8,6 +8,7 @@ import 'package:dartssh2/dartssh2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:liquid_galaxy_rig/LiquidG.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'Settings.dart';
 
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  Setting(),
+      home:  LiquidButtons(ip: "", user: "", pass: "", port: 22),
     );
   }
 }
